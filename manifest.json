@@ -2,6 +2,15 @@
     "manifest_version": 3,
     "name": "portal_extension",
     "version": "1.0",
-    "description": ""
+    "description": "for portal",
+    "action": {
+        "default_popup": "portal.html"
+    },
+    "content_scripts": [
+        {
+          "matches": ["https://service.cloud.teu.ac.jp/portal/index"],
+          "js": ["portal.js"]
+        }
+      ]
 
 }
