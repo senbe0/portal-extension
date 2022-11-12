@@ -8,9 +8,10 @@
     },
     "content_scripts": [
         {
-          "matches": ["https://service.cloud.teu.ac.jp/portal/index"],
+          "matches": ["https://service.cloud.teu.ac.jp/portal/index*"],
           "js": ["portal.js"]
         }
       ]
+      
 
 }
