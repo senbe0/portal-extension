@@ -13,10 +13,10 @@ window.addEventListener("load", main, false);
 
 function main(e) {
 
-    //DOMが構成されるまで繰り返す。
     const checkboxTimer = setInterval(load_checkbox, 100);
     
     function load_checkbox() {
+        //It seems that the Side menu bar DOM construction is delayed.
         if (document.getElementById("side_dock") != null) {
 
             clearInterval(checkboxTimer);
@@ -360,9 +360,10 @@ function initializeStoragevalues() {
 
 /* 
 
-const Sections  = document.getElementsByClassName("content-part content-plugin");
 
-remove all key and value.
+Sections  = document.getElementsByClassName("content-part content-plugin");
+
+//Remove all keys and values.
 localStorage.removeItem("isDisplayed_Welcome");
 localStorage.removeItem("isDisplayed_Oshirase");
 localStorage.removeItem("isDisplayed_Calendar");
@@ -371,17 +372,12 @@ localStorage.removeItem("isDisplayed_Corona");
 localStorage.removeItem("isDisplayed_Prevent");
 localStorage.removeItem("isMoved_AttendSystem");
 
-・各要素の位置メモ・
-「Welcome to TUT Portal」
-Welcome
-「大学からのお知らせ」
-Oshirase
-「大学カレンダー」
-Calendar
-「時間割」
-Timetable
-「新型コロナウイルス対応について」
-Corona
-「感染症対策にご協力ください」
-Prevent
+
+Welcome to TUT Portal: Welcome
+大学からのお知らせ: Oshirase
+大学カレンダー: Calendar
+時間割: Timetable
+新型コロナウイルス対応について: Corona
+感染症対策にご協力ください: Prevent
+
 */ 
