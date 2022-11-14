@@ -6,6 +6,7 @@ var isDisplayed_Calendar = localStorage.getItem("isDisplayed_Calendar");
 var isDisplayed_Timetable = localStorage.getItem("isDisplayed_Timetable");
 var isDisplayed_Corona = localStorage.getItem("isDisplayed_Corona");
 var isDisplayed_Prevent = localStorage.getItem("isDisplayed_Prevent");
+var isDisplayed_KokaWNET = localStorage.getItem("isDisplayed_KokaWNET");
 var isMoved_AttendSystem = localStorage.getItem("isMoved_AttendSystem");
 
 window.addEventListener("load", main, false);
@@ -16,22 +17,20 @@ function main(e) {
     const checkboxTimer = setInterval(load_checkbox, 100);
     
     function load_checkbox() {
-        if (document.getElementById("global-footer") != null) {
+        if (document.getElementById("side_dock") != null) {
 
             clearInterval(checkboxTimer);
 
-            const Section = document.getElementsByClassName("vimana-plugins flex-wrap")[0];
+            const Sections  = document.getElementsByClassName("content-part content-plugin");
             const Field = document.getElementById("panel-index"); 
             const Menu = document.getElementById("side_dock");    //side menu.
-            const Welcome = document.getElementsByClassName("content-part")[1];
-            const Oshirase = document.getElementsByClassName("content-part")[6];
-            const Calendar  = document.getElementsByClassName("content-part")[7];
-            const Timetable = document.getElementsByClassName("content-part")[8];
-            const Corona = document.getElementsByClassName("XFF_covid-19_notice")[0];
-            const Prevent = document.getElementsByClassName("XFF_covid-19_action")[0];
+            
+            var Welcome = KokaWNET = Oshirase = Calendar = 
+                Timetable = Corona = Prevent = null;
             //Caution: To avoid attendance problems, you cannot hide Attend System. 
             //It's only used to move to the top of sections.
-            const AttendSystem = document.getElementsByClassName("content-part")[9];
+            var AttendSystem = null;
+
 
             const Footer = document.getElementById("global-header");
             const Div = document.createElement("div"); 
@@ -42,6 +41,7 @@ function main(e) {
             const checkbox_Tim = document.createElement("input");
             const checkbox_Cor = document.createElement("input");
             const checkbox_Pre = document.createElement("input");
+            const checkbox_Kok = document.createElement("input");
             const checkbox_MoveAttend = document.createElement("input");
 
             const WelDesc = document.createElement("p");
@@ -50,13 +50,14 @@ function main(e) {
             const TimDesc = document.createElement("p");
             const CorDesc = document.createElement("p");
             const PreDesc = document.createElement("p");
+            const KokDesc = document.createElement("p");
             const MoveDesc = document.createElement("p");
 
             Div.id = "div_checkboxs";
 
             checkbox_Wel.type = checkbox_Osh.type = checkbox_Cal.type = 
             checkbox_Tim.type = checkbox_Cor.type = checkbox_Pre.type = 
-            checkbox_MoveAttend.type = "checkbox";
+            checkbox_Kok.type = checkbox_MoveAttend.type = "checkbox";
 
             WelDesc.innerText = "Welcome to TUT Portal";
             OshDesc.innerText = "大学からのお知らせ";
@@ -64,22 +65,34 @@ function main(e) {
             TimDesc.innerText = "時間割";
             CorDesc.innerText = "新型コロナウイルス対応について";
             PreDesc.innerText = "感染症対策にご協力ください";
+            KokDesc.innerText = "KOKADAI-WNET利用時のお願い";
             MoveDesc.innerText = "「出席管理システム」をトップに移動"
+
+            // checkbox_Wel.style.display = checkbox_Osh.style.display  = 
+            // checkbox_Cal.style.display = checkbox_Tim.style.display = 
+            // checkbox_Cor.style.display = checkbox_Pre.style.display = 
+            // checkbox_Kok.style.display = 
+            // checkbox_MoveAttend.style.display =  "block";
 
             WelDesc.style.display = OshDesc.style.display = 
             CalDesc.style.display = TimDesc.style.display = 
             CorDesc.style.display = PreDesc.style.display = 
-            PreDesc.style.display = MoveDesc.style.display = "none";
+            PreDesc.style.display = KokDesc.style.display =
+            MoveDesc.style.display = 
+             "none";
 
             checkbox_MoveAttend.style = "accent-color: red;"
-        
 
+            
+          
+        
             Div.appendChild(checkbox_Wel);
             Div.appendChild(checkbox_Osh);
             Div.appendChild(checkbox_Cal);
             Div.appendChild(checkbox_Tim);
             Div.appendChild(checkbox_Cor);
             Div.appendChild(checkbox_Pre);
+            Div.appendChild(checkbox_Kok);
             Div.appendChild(checkbox_MoveAttend);
             Footer.appendChild(Div);
             Field.appendChild(Menu);//Evacuate sideMenu 
@@ -90,6 +103,7 @@ function main(e) {
             Footer.appendChild(TimDesc);
             Footer.appendChild(CorDesc);
             Footer.appendChild(PreDesc);
+            Footer.appendChild(KokDesc);
             Footer.appendChild(MoveDesc);
 
             checkbox_Wel.onchange = () => {
@@ -152,12 +166,22 @@ function main(e) {
                 }
             }
 
+            checkbox_Kok.onchange = () => {
+                if (checkbox_Kok.checked) {
+                    KokaWNET.style.display ="block";
+                    localStorage.setItem("isDisplayed_KokaWNET", true);
+                } else {
+                    KokaWNET.style.display ="none";
+                    localStorage.setItem("isDisplayed_KokaWNET", false);
+                }
+            }
+
             checkbox_MoveAttend.onchange = () => {
                 if (checkbox_MoveAttend.checked) {
                     Welcome.before(AttendSystem);
                     localStorage.setItem("isMoved_AttendSystem", true);
                 } else {
-                    Section.appendChild(AttendSystem);
+                    document.getElementsByClassName("vimana-plugins flex-wrap")[0].appendChild(AttendSystem);
                     localStorage.setItem("isMoved_AttendSystem", false);
                 }
             }
@@ -205,6 +229,13 @@ function main(e) {
                 PreDesc.style.display = "none";
             });
 
+            checkbox_Kok.addEventListener("mouseover", ()=>{
+                KokDesc.style.display = "block";
+            });
+            checkbox_Kok.addEventListener("mouseleave", ()=>{
+                KokDesc.style.display = "none";
+            });
+
             checkbox_MoveAttend.addEventListener("mouseover", ()=>{
                 MoveDesc.style.display = "block";
             });
@@ -212,6 +243,50 @@ function main(e) {
                 MoveDesc.style.display = "none";
             });
 
+            for (var i=0; i < Sections.length; i++) {
+                switch (Sections[i].children[0].innerText) {
+                    case "Welcome to TUT Portal": 
+                        Welcome = Sections[i];
+                        // checkbox_Wel.style.display = "block";
+                        break;
+                    
+                    case "KOKADAI-WNET利用時のお願い":
+                        KokaWNET = Sections[i];
+                        // checkbox_Kok.style.display = "block";
+                        break;
+                    
+                    case "新型コロナウイルス対応について":
+                        Corona = Sections[i];
+                        // checkbox_Cor.style.display = "block";
+                        break;
+                    
+                    case "感染症対策にご協力ください":
+                        Prevent = Sections[i];
+                        // checkbox_Pre.style.display = "block";
+                        break;
+            
+                    case "大学からのお知らせ":
+                        Oshirase = Sections[i];
+                        // checkbox_Osh.style.display = "block";
+                        break;
+            
+                    case "大学カレンダー":
+                        Calendar = Sections[i];
+                        // checkbox_Cal.style.display = "block";
+                        break;
+            
+                    case "時間割:ピン留めクイックアクセス(β)":
+                        Timetable = Sections[i];
+                        // checkbox_Tim.style.display = "block";
+                        break;
+            
+                    case "出席管理システム":
+                        AttendSystem = Sections[i];
+                        // checkbox_MoveAttend.style.display = "block";
+                        break;
+            
+                }
+            }
 
             
             //LocalStrage内の状態を読み込み、前回の状態に戻す。
@@ -239,11 +314,15 @@ function main(e) {
             ? checkbox_Pre.checked = true
             : Prevent.style.display ="none";
 
+            (isDisplayed_KokaWNET == "true")
+            ? checkbox_Kok.checked = true
+            : KokaWNET.style.display = "none";
+
             if (isMoved_AttendSystem == "true") {
                 checkbox_MoveAttend.checked = true
                 Welcome.before(AttendSystem);
             } else {
-                Section.appendChild(AttendSystem);
+                document.getElementsByClassName("vimana-plugins flex-wrap")[0].appendChild(AttendSystem);
             }
 
         }
@@ -270,6 +349,9 @@ function initializeStoragevalues() {
     if (localStorage.getItem("isDisplayed_Prevent") == null) {
         localStorage.setItem("isDisplayed_Prevent", true);
     }
+    if (localStorage.getItem("isDisplayed_KokaWNET" == null)) {
+        localStorage.setItem("isDisplayed_KokaWNET", true);
+    }
     if (localStorage.getItem("isMoved_AttendSystem") == null) {
         localStorage.setItem("isMoved_AttendSystem", false);
     }
@@ -279,25 +361,27 @@ function initializeStoragevalues() {
 /* 
 
 const Sections  = document.getElementsByClassName("content-part content-plugin");
-for (var i; i < 12; i++) {
-    if (Sections[i].children[0].innerText == "Welcome to TUT Portal") {
-        Welcome = Section[i];
-    }
-}
 
+remove all key and value.
+localStorage.removeItem("isDisplayed_Welcome");
+localStorage.removeItem("isDisplayed_Oshirase");
+localStorage.removeItem("isDisplayed_Calendar");
+localStorage.removeItem("isDisplayed_Timetable");
+localStorage.removeItem("isDisplayed_Corona");
+localStorage.removeItem("isDisplayed_Prevent");
+localStorage.removeItem("isMoved_AttendSystem");
 
 ・各要素の位置メモ・
 「Welcome to TUT Portal」
-Welcome = document.getElementsByClassName("content-part")[1];
+Welcome
 「大学からのお知らせ」
-Oshirase = document.getElementsByClassName("content-part")[6];
+Oshirase
 「大学カレンダー」
-Calendar = document.getElementsByClassName("content-part")[7];
+Calendar
 「時間割」
-Timetable = document.getElementsByClassName("content-part")[8];
+Timetable
 「新型コロナウイルス対応について」
-Corona = document.getElementsByClassName("XFF_covid-19_notice")[0];
+Corona
 「感染症対策にご協力ください」
-Prevent = document.getElementsByClassName("XFF_covid-19_action")[0];
-
+Prevent
 */ 
