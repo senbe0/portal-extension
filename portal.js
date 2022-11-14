@@ -16,7 +16,7 @@ function main(e) {
     const checkboxTimer = setInterval(load_checkbox, 100);
     
     function load_checkbox() {
-        //It seems that the Side menu bar DOM construction is delayed.
+        // It seems that the Side menu bar DOM construction is delayed.
         if (document.getElementById("side_dock") != null) {
 
             clearInterval(checkboxTimer);
@@ -27,8 +27,8 @@ function main(e) {
             
             var Welcome = KokaWNET = Oshirase = Calendar = 
                 Timetable = Corona = Prevent = null;
-            //Caution: To avoid attendance problems, you cannot hide Attend System. 
-            //It's only used to move to the top of sections.
+            // Caution: To avoid attendance problems, you cannot hide Attend System. 
+            // It's only used to move to the top of sections.
             var AttendSystem = null;
 
 
@@ -68,12 +68,6 @@ function main(e) {
             KokDesc.innerText = "KOKADAI-WNET利用時のお願い";
             MoveDesc.innerText = "「出席管理システム」をトップに移動"
 
-            // checkbox_Wel.style.display = checkbox_Osh.style.display  = 
-            // checkbox_Cal.style.display = checkbox_Tim.style.display = 
-            // checkbox_Cor.style.display = checkbox_Pre.style.display = 
-            // checkbox_Kok.style.display = 
-            // checkbox_MoveAttend.style.display =  "block";
-
             WelDesc.style.display = OshDesc.style.display = 
             CalDesc.style.display = TimDesc.style.display = 
             CorDesc.style.display = PreDesc.style.display = 
@@ -95,7 +89,7 @@ function main(e) {
             Div.appendChild(checkbox_Kok);
             Div.appendChild(checkbox_MoveAttend);
             Footer.appendChild(Div);
-            Field.appendChild(Menu);//Evacuate sideMenu 
+            Field.appendChild(Menu);// Evacuate sideMenu 
             
             Footer.appendChild(WelDesc);
             Footer.appendChild(OshDesc);
@@ -247,49 +241,41 @@ function main(e) {
                 switch (Sections[i].children[0].innerText) {
                     case "Welcome to TUT Portal": 
                         Welcome = Sections[i];
-                        // checkbox_Wel.style.display = "block";
                         break;
                     
                     case "KOKADAI-WNET利用時のお願い":
                         KokaWNET = Sections[i];
-                        // checkbox_Kok.style.display = "block";
                         break;
                     
                     case "新型コロナウイルス対応について":
                         Corona = Sections[i];
-                        // checkbox_Cor.style.display = "block";
                         break;
                     
                     case "感染症対策にご協力ください":
                         Prevent = Sections[i];
-                        // checkbox_Pre.style.display = "block";
                         break;
             
                     case "大学からのお知らせ":
                         Oshirase = Sections[i];
-                        // checkbox_Osh.style.display = "block";
                         break;
             
                     case "大学カレンダー":
                         Calendar = Sections[i];
-                        // checkbox_Cal.style.display = "block";
                         break;
             
                     case "時間割:ピン留めクイックアクセス(β)":
                         Timetable = Sections[i];
-                        // checkbox_Tim.style.display = "block";
                         break;
             
                     case "出席管理システム":
                         AttendSystem = Sections[i];
-                        // checkbox_MoveAttend.style.display = "block";
                         break;
             
                 }
             }
 
             
-            //LocalStrage内の状態を読み込み、前回の状態に戻す。
+            // Reads values in LocalStrage and restores the previous state.
             (isDisplayed_Welcome == "true") 
             ? checkbox_Wel.checked = true
             : Welcome.style.display ="none";
@@ -329,7 +315,7 @@ function main(e) {
     }
 };
 
-//The default value is set only once.
+// The default value is set only once.
 function initializeStoragevalues() {
     if (localStorage.getItem("isDisplayed_Welcome") == null) {
         localStorage.setItem("isDisplayed_Welcome", true);
@@ -355,24 +341,27 @@ function initializeStoragevalues() {
     if (localStorage.getItem("isMoved_AttendSystem") == null) {
         localStorage.setItem("isMoved_AttendSystem", false);
     }
+    
+    
+    /*
+      // Use these snippets to remove all keys and values!!
+      localStorage.removeItem("isDisplayed_Welcome");
+      localStorage.removeItem("isDisplayed_Oshirase");
+      localStorage.removeItem("isDisplayed_Calendar");
+      localStorage.removeItem("isDisplayed_Timetable");
+      localStorage.removeItem("isDisplayed_Corona");
+      localStorage.removeItem("isDisplayed_Prevent");
+      localStorage.removeItem("isMoved_AttendSystem");
+    */
 }
 
 
 /* 
 
-
+// Section part.
 Sections  = document.getElementsByClassName("content-part content-plugin");
 
-//Remove all keys and values.
-localStorage.removeItem("isDisplayed_Welcome");
-localStorage.removeItem("isDisplayed_Oshirase");
-localStorage.removeItem("isDisplayed_Calendar");
-localStorage.removeItem("isDisplayed_Timetable");
-localStorage.removeItem("isDisplayed_Corona");
-localStorage.removeItem("isDisplayed_Prevent");
-localStorage.removeItem("isMoved_AttendSystem");
-
-
+// notes
 Welcome to TUT Portal: Welcome
 大学からのお知らせ: Oshirase
 大学カレンダー: Calendar
