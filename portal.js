@@ -277,6 +277,15 @@ function initializeStoragevalues() {
 
 
 /* 
+
+const Sections  = document.getElementsByClassName("content-part content-plugin");
+for (var i; i < 12; i++) {
+    if (Sections[i].children[0].innerText == "Welcome to TUT Portal") {
+        Welcome = Section[i];
+    }
+}
+
+
 ・各要素の位置メモ・
 「Welcome to TUT Portal」
 Welcome = document.getElementsByClassName("content-part")[1];
@@ -290,6 +299,5 @@ Timetable = document.getElementsByClassName("content-part")[8];
 Corona = document.getElementsByClassName("XFF_covid-19_notice")[0];
 「感染症対策にご協力ください」
 Prevent = document.getElementsByClassName("XFF_covid-19_action")[0];
-「セクション全体選択」
-Section = document.getElementsByClassName("vimana-plugins flex-wrap")[0];
+
 */ 
