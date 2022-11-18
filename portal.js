@@ -300,9 +300,11 @@ function main(e) {
             ? checkbox_Pre.checked = true
             : Prevent.style.display ="none";
 
+            if (KokaWNET != null) {
             (isDisplayed_KokaWNET == "true")
             ? checkbox_Kok.checked = true
             : KokaWNET.style.display = "none";
+            }
 
             if (isMoved_AttendSystem == "true") {
                 checkbox_MoveAttend.checked = true
