@@ -162,14 +162,10 @@ function main(e) {
 
             checkbox_Kok.onchange = () => {
                 if (checkbox_Kok.checked) {
-                    if (KokaWNET != null) {
                     KokaWNET.style.display ="block";
-                    }
                     localStorage.setItem("isDisplayed_KokaWNET", true);
                 } else {
-                    if (KokaWNET != null) {
                     KokaWNET.style.display ="none";
-                    }
                     localStorage.setItem("isDisplayed_KokaWNET", false);
                 }
             }
@@ -278,7 +274,11 @@ function main(e) {
                 }
             }
 
-            
+            // When there is no connection to Wi-Fi, the checkbox_Kok is hidden.
+            if (KokaWNET == null) {
+                checkbox_Kok.style.display = "none" 
+            }
+
             // Reads values in LocalStrage and restores the previous state.
             (isDisplayed_Welcome == "true") 
             ? checkbox_Wel.checked = true
@@ -304,11 +304,10 @@ function main(e) {
             ? checkbox_Pre.checked = true
             : Prevent.style.display ="none";
 
-            if (KokaWNET != null) {
             (isDisplayed_KokaWNET == "true")
             ? checkbox_Kok.checked = true
             : KokaWNET.style.display = "none";
-            }
+            
 
             if (isMoved_AttendSystem == "true") {
                 checkbox_MoveAttend.checked = true
