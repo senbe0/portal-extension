@@ -162,10 +162,14 @@ function main(e) {
 
             checkbox_Kok.onchange = () => {
                 if (checkbox_Kok.checked) {
+                    if (KokaWNET != null) {
                     KokaWNET.style.display ="block";
+                    }
                     localStorage.setItem("isDisplayed_KokaWNET", true);
                 } else {
+                    if (KokaWNET != null) {
                     KokaWNET.style.display ="none";
+                    }
                     localStorage.setItem("isDisplayed_KokaWNET", false);
                 }
             }
