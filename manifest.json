@@ -6,12 +6,15 @@
     "action": {
         "default_popup": "portal.html"
     },
+    "icons": {
+      "16": "images/koutei_16.png",
+      "48": "images/koutei_48.png",
+      "128": "images/koutei_128.png"
+    },
     "content_scripts": [
         {
           "matches": ["https://service.cloud.teu.ac.jp/portal/index*"],
           "js": ["portal.js"]
         }
       ]
-      
-
 }

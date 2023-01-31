@@ -14,7 +14,7 @@ window.addEventListener("load", main, false);
 function main(e) {
 
     const checkboxTimer = setInterval(load_checkbox, 100);
-    
+
     function load_checkbox() {
         // It seems that the Side menu bar DOM construction is delayed.
         if (document.getElementById("side_dock") != null) {
@@ -24,13 +24,12 @@ function main(e) {
             const Sections  = document.getElementsByClassName("content-part content-plugin");
             const Field = document.getElementById("panel-index"); 
             const Menu = document.getElementById("side_dock");    //side menu.
-            
+
             var Welcome = KokaWNET = Oshirase = Calendar = 
                 Timetable = Corona = Prevent = null;
             // Caution: To avoid attendance problems, you cannot hide Attend System. 
             // It's only used to move to the top of sections.
             var AttendSystem = null;
-
 
             const Footer = document.getElementById("global-header");
             const Div = document.createElement("div"); 
@@ -77,9 +76,7 @@ function main(e) {
 
             checkbox_MoveAttend.style = "accent-color: red;"
 
-            
-          
-        
+
             Div.appendChild(checkbox_Wel);
             Div.appendChild(checkbox_Osh);
             Div.appendChild(checkbox_Cal);
@@ -180,7 +177,6 @@ function main(e) {
                 }
             }
 
-
             checkbox_Wel.addEventListener("mouseover", ()=>{
                 WelDesc.style.display = "block";
             });
@@ -242,35 +238,34 @@ function main(e) {
                     case "Welcome to TUT Portal": 
                         Welcome = Sections[i];
                         break;
-                    
+
                     case "KOKADAI-WNET利用時のお願い":
                         KokaWNET = Sections[i];
                         break;
-                    
+
                     case "新型コロナウイルス対応について":
                         Corona = Sections[i];
                         break;
-                    
+
                     case "感染症対策にご協力ください":
                         Prevent = Sections[i];
                         break;
-            
+
                     case "大学からのお知らせ":
                         Oshirase = Sections[i];
                         break;
-            
+
                     case "大学カレンダー":
                         Calendar = Sections[i];
                         break;
-            
+
                     case "時間割:ピン留めクイックアクセス(β)":
                         Timetable = Sections[i];
                         break;
-            
+
                     case "出席管理システム":
                         AttendSystem = Sections[i];
-                        break;
-            
+                        break; 
                 }
             }
 
@@ -283,23 +278,23 @@ function main(e) {
             (isDisplayed_Welcome == "true") 
             ? checkbox_Wel.checked = true
             : Welcome.style.display ="none";
-        
+
             (isDisplayed_Oshirase == "true") 
             ? checkbox_Osh.checked = true 
             : Oshirase.style.display ="none";
-        
+
             (isDisplayed_Calendar == "true") 
             ? checkbox_Cal.checked = true
             : Calendar.style.display ="none";
-        
+
             (isDisplayed_Timetable == "true") 
             ? checkbox_Tim.checked = true
             : Timetable.style.display ="none";
-        
+
             (isDisplayed_Corona == "true") 
             ? checkbox_Cor.checked = true
             : Corona.style.display ="none";
-        
+
             (isDisplayed_Prevent == "true") 
             ? checkbox_Pre.checked = true
             : Prevent.style.display ="none";
@@ -320,6 +315,7 @@ function main(e) {
         }
     }
 };
+
 
 // The default value is set only once.
 function initializeStoragevalues() {
@@ -347,8 +343,8 @@ function initializeStoragevalues() {
     if (localStorage.getItem("isMoved_AttendSystem") == null) {
         localStorage.setItem("isMoved_AttendSystem", false);
     }
-    
-    
+
+
     /*
       // Use these snippets to remove all keys and values!!
       localStorage.removeItem("isDisplayed_Welcome");
@@ -362,7 +358,7 @@ function initializeStoragevalues() {
 }
 
 
-/* 
+/*
 
 // Section part.
 Sections  = document.getElementsByClassName("content-part content-plugin");
@@ -375,4 +371,4 @@ Welcome to TUT Portal: Welcome
 新型コロナウイルス対応について: Corona
 感染症対策にご協力ください: Prevent
 
-*/ 
+*/
