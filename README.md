@@ -6,7 +6,6 @@
 ※出席登録が正常に行われたかは、「Welcome to TUT Portal」の出席履歴確認で確認してください(授業終了後に反映される。少しのラグあり。)。  
   
 ※If there are any problems with the attendance management system, STOP using it immediately and uninstall it.  
-  
 ※Please check the source code and use it at your own risk.  
   
 # 中途半端な部分
