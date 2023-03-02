@@ -2,7 +2,6 @@
 自分用に作った学生ポータル拡張機能です。  
 出席登録が一番下にあるのが、地味にイライラするので勝手に作って使っていました。
 現時点(2023/12)で出席管理システムは正常に動作し、悪影響は確認されていません。  
-もし改造して面白い機能追加したら教えてください^^(僕も使ってみたい。)
 
 # 使い方
 拡張機能をインストールすると怪しいチェックボックスが出現します。  
@@ -17,6 +16,6 @@
 ※ If there are any problems with the attendance management system, STOP using it immediately and uninstall it.  
 **※ Please check the source code and use it at your own risk.**  
   
-# 中途半端な部分
+# その他
 「Welcome to TUT Portal」のタブを非表示にすると、右に表示される「お知らせ更新」も同時に非表示になります。注意してください。  
- 直したい人いたら、ご自由に改変してどぞー^^;
+ 直したり改造したい人いたら、ご自由に。
